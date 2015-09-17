@@ -12,6 +12,8 @@
 #include <time.h>     // to get system time
 #include <stdio.h>    // printf
 #include <sys/wait.h> // 
+#include <sys/time.h>
+#include <sys/resource.h>
 
 #define NUM_CHILDREN 4 
 #define MAX_N 10
@@ -21,14 +23,15 @@
 void child_proc(int bin_start, int child_number);
 void child(int child_number);
 void print_info(int child_number);
+void print_time_info(int child_number);
 char* cuserid_wrapper();
-void waste_time(); //implement this to waste some time
+void getrusage_wrapper(struct rusage* output);
+void waste_time(); 
 static int bin_coefficient(int n, int r);
 
 int main(int argc, char *argv[]) {
-  int i;
   int status = 0;
-  pid_t child1_pid, child2_pid, child3_pid, child4_pid;
+  pid_t child1_pid, child2_pid, child3_pid, child4_pid, wpid;
 
   child1_pid = fork();
 
@@ -39,8 +42,8 @@ int main(int argc, char *argv[]) {
   else if (child1_pid == 0) {
     print_info(1);
     printf("(%d (%d - 2)) binomial coefficent computations of integers n=2, 3, 10, start now! \n", MAX_N, MAX_N);
-  } else {
-    //these are executing first because it's the parent process. Is this a big deal?
+    print_time_info(1);
+  } else { //if here then we're the parent, execute child 2
     child2_pid = fork();
 
     if (child2_pid == -1){
@@ -52,7 +55,7 @@ int main(int argc, char *argv[]) {
       print_info(2);
       child_proc(2, 2);
 
-    } else {
+    } else { //if here then we're the parent, execute child 3
         waitpid(child1_pid, &status, 0);
         printf("child1 terminated with status: %d\n", status);
 
@@ -84,26 +87,26 @@ int main(int argc, char *argv[]) {
           sleep(1);
            print_info(4);
           system("ls -l");
+          print_time_info(4);
         } else {
            waitpid(child4_pid, &status, 0);
            printf("child4 terminated with status: %d\n", status);
+           print_time_info(0);
         }   
     }
   }
-
   return (EXIT_SUCCESS);
 }
 
 void child_proc(int bin_start, int child_number){
-  //get start time
   sleep(2);
   int i;
   for (i = bin_start; i < 11; i += 2) {
     int result = bin_coefficient(i, i-2);
-    printf("CHILD %d printing binary coefficient of %d and %d which is %d \n", child_number, i, i-2, result);
+    printf("[CHILD %d] printing binary coefficient of %d and %d which is %d \n", child_number, i, i-2, result);
     sleep(2);
   }
-  //print current time - start time before exiting
+  print_time_info(child_number);
   exit(EXIT_SUCCESS);
 }
 
@@ -119,8 +122,32 @@ void print_info(int child_number){
   printf("-------------------------------------------\n");
 }
 
+void print_time_info(int child_number){
+  time_t current_time;
+  waste_time();
+
+  struct rusage res_usage;
+
+  current_time = time(NULL);
+  if (current_time == ((time_t) -1 )){
+    perror("Error getting time");
+    exit(EXIT_FAILURE);
+  }
+
+  getrusage_wrapper(&res_usage);
+  if( child_number > 0 ) {
+    printf("[Child %d] user CPU time: %d us\n", child_number, (int)res_usage.ru_utime.tv_usec);
+    printf("[Child %d] system CPU time: %d us\n", child_number, (int)res_usage.ru_stime.tv_usec);
+  }
+  else {
+    printf("[Parent] user CPU time: %d us\n",  (int)res_usage.ru_utime.tv_usec);
+    printf("[Parent] system CPU time: %d us\n",(int)res_usage.ru_stime.tv_usec);
+  }
+}
+
 /**
  * Get the cuserid, return error if it doesnt work
+ * Taken from Spring 2015 assignment 1
  */
 char* cuserid_wrapper(){
     char* val = cuserid(NULL);
@@ -132,11 +159,26 @@ char* cuserid_wrapper(){
     }
 }
 
+/**
+ * For setting the rusage struct and detecting if its an error
+ * Taken from Spring 2015 assignment 1
+ */ 
+void getrusage_wrapper(struct rusage* output){
+    int val = getrusage(RUSAGE_SELF, output);
+    if (val == -1){
+        perror("getrusage_wrapper");
+        exit(EXIT_FAILURE);
+    }
+}
+
+
 void waste_time(){
     int i;
+    int j = 0;
     printf("Wasting some CPU time to get significant results\n");
-    for(i = 0; i < 600000; i++){
-	//waste some CPU Time to get significant results for execution time
+    for(i = 0; i < 100000000; i++){
+	    //waste some CPU Time to get significant results for execution time
+      j += 1;
     }
 }
 /*
