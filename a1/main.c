@@ -5,13 +5,13 @@
  */
 #define _XOPEN_SOURCE // required for cuserid to work
 
-#include <unistd.h> // fork()
-#include <limits.h>  // Needed for HOST_NAME_MAX
-#include <errno.h>  // EXIT_FAILURE, //EXIT_SUCCESS
-#include <stdlib.h> //exit
-#include <time.h>   // to get system time
-#include <stdio.h> //printf
-#include <sys/wait.h>
+#include <unistd.h>   // fork()
+#include <limits.h>   // Needed for HOST_NAME_MAX
+#include <errno.h>    // EXIT_FAILURE, //EXIT_SUCCESS
+#include <stdlib.h>   // exit
+#include <time.h>     // to get system time
+#include <stdio.h>    // printf
+#include <sys/wait.h> // 
 
 #define NUM_CHILDREN 4 
 #define MAX_N 10
@@ -22,11 +22,10 @@ void child_proc(int bin_start, int child_number);
 void child(int child_number);
 void print_info(int child_number);
 char* cuserid_wrapper();
+void waste_time(int child_number); //implement this to waste some time
 static int bin_coefficient(int n, int r);
-int n;
 
 int main(int argc, char *argv[]) {
-  n = 2;
   int i;
   int status = 0;
   pid_t child1_pid, child2_pid, child3_pid, child4_pid;
@@ -55,7 +54,7 @@ int main(int argc, char *argv[]) {
 
     } else {
         waitpid(child1_pid, &status, 0);
-        printf("child1 terminated\n");
+        printf("child1 terminated with status: %d\n", status);
 
         child3_pid = fork();
 
@@ -70,10 +69,10 @@ int main(int argc, char *argv[]) {
 
         } else {
           waitpid(child3_pid, &status, 0);
-          printf("child3 terminated\n");
+          printf("child3 terminated with status: %d\n", status);
         }
         waitpid(child2_pid, &status, 0);
-        printf("child2 terminated\n");
+        printf("child2 terminated with status: %d\n", status);
 
         child4_pid = fork();
 
@@ -87,17 +86,12 @@ int main(int argc, char *argv[]) {
           system("ls -l");
         } else {
            waitpid(child4_pid, &status, 0);
-           printf("child4 terminated\n");
+           printf("child4 terminated with status: %d\n", status);
         }   
     }
   }
-/*
-  while ((wpid = wait(&status)) > 0){ //this should wait for all children to be done
-    printf("Exit status of %d was %d \n", (int)wpid, status);
-  } 
-*/
 
-  return 0;
+  return (EXIT_SUCCESS);
 }
 
 void child_proc(int bin_start, int child_number){
