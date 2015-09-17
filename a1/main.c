@@ -19,6 +19,7 @@
 //Function Declarations
 void child_proc(int bin_start, int child_number);
 void child(int child_number);
+void print_info(int child_number);
 static int bin_coefficient(int n, int r);
 int n;
 
@@ -30,28 +31,42 @@ int main(int argc, char *argv[]) {
 
   child1_pid = fork();
   if (child1_pid == 0) {
+    print_info(1);
     printf("(%d (%d - 2)) binomial coefficent computations of integers n=2, 3, 10, start now! \n", MAX_N, MAX_N);
   } else {
     //these are executing first because it's the parent process. Is this a big deal?
     child2_pid = fork();
     if (child2_pid == 0) {
       sleep(1);
-
+      print_info(2);
       child_proc(2, 2);
-    }
 
-    child3_pid = fork();
-    if (child3_pid == 0) {
-      sleep(2);
+    } else {
+        waitpid(child1_pid, &status, 0);
+        printf("child1 terminated\n");
 
-      child_proc(3, 3);
-    }
+        child3_pid = fork();
+        if (child3_pid == 0) {
+          sleep(2);
+          print_info(3);
+          child_proc(3, 3);
 
-    child4_pid = fork();
-    if (child4_pid == 0){
-      sleep(12);
-      printf("Child 4 (PID = %d, PPID = %d) executing 'ls -l' \n", getpid(), getppid());
-      system("ls -l");
+        } else {
+          waitpid(child3_pid, &status, 0);
+          printf("child3 terminated\n");
+        }
+        waitpid(child2_pid, &status, 0);
+        printf("child2 terminated\n");
+
+        child4_pid = fork();
+        if (child4_pid == 0){
+          sleep(1);
+           print_info(4);
+          system("ls -l");
+        } else {
+           waitpid(child4_pid, &status, 0);
+           printf("child4 terminated\n");
+        }   
     }
   }
 /*
@@ -76,31 +91,8 @@ void child_proc(int bin_start, int child_number){
   exit(EXIT_SUCCESS);
 }
 
-void child(int child_number){
-
-  if(child_number == 1){
-    printf("(%d (%d - 2)) binomial coefficent computations of integers n=2, 3, 10, start now! \n", MAX_N, MAX_N);
-  } else if (child_number == 2){
-    printf("INSIDE CHILD %d\n", child_number);
-    int i;
-    for(i = 2; i <= MAX_N; i += 2){
-      int result = bin_coefficient(i, i-2);
-      printf("CHILD %d printing binary coefficient of %d and %d which is %d \n", child_number, i, i-2, result);
-      sleep(1);
-    }
-
-  } else if (child_number == 3){
-    printf("INSIDE CHILD: %d\n", child_number);
-    int i;
-    for(i = 3; i <= MAX_N - 1 ; i += 2){
-      int result = bin_coefficient(i, i-2);
-      printf("CHILD %d printing binary coefficient of %d and %d which is %d \n", child_number, i, i-2, result);
-      sleep(1);
-    }
-  } else if (child_number == 4){
-    printf("INSIDE CHILD= %d\n", child_number);
-  }
-
+void print_info(int child_number){
+  printf("[CHILD %d] PPID = %d, PID = %d\n", child_number, getppid(), getpid());
 }
 /*
  * computes binomial coefficents of n and r
