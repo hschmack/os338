@@ -134,6 +134,7 @@ char* cuserid_wrapper(){
 
 void waste_time(){
     int i;
+    printf("Wasting some CPU time to get significant results\n");
     for(i = 0; i < 600000; i++){
 	//waste some CPU Time to get significant results for execution time
     }
