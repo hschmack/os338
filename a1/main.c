@@ -32,13 +32,23 @@ int main(int argc, char *argv[]) {
   pid_t child1_pid, child2_pid, child3_pid, child4_pid;
 
   child1_pid = fork();
-  if (child1_pid == 0) {
+
+  if (child1_pid == -1){
+    perror("Error trying to fork child1");
+    exit(EXIT_FAILURE);
+  }
+  else if (child1_pid == 0) {
     print_info(1);
     printf("(%d (%d - 2)) binomial coefficent computations of integers n=2, 3, 10, start now! \n", MAX_N, MAX_N);
   } else {
     //these are executing first because it's the parent process. Is this a big deal?
     child2_pid = fork();
-    if (child2_pid == 0) {
+
+    if (child2_pid == -1){
+      perror("Error trying to fork child2");
+      exit(EXIT_FAILURE);
+    }
+    else if (child2_pid == 0) {
       sleep(1);
       print_info(2);
       child_proc(2, 2);
@@ -48,7 +58,12 @@ int main(int argc, char *argv[]) {
         printf("child1 terminated\n");
 
         child3_pid = fork();
-        if (child3_pid == 0) {
+
+        if (child3_pid == -1){
+          perror("Error trying to fork child3");
+          exit(EXIT_FAILURE);
+        }
+        else if (child3_pid == 0) {
           sleep(2);
           print_info(3);
           child_proc(3, 3);
@@ -61,7 +76,12 @@ int main(int argc, char *argv[]) {
         printf("child2 terminated\n");
 
         child4_pid = fork();
-        if (child4_pid == 0){
+
+        if (child4_pid == -1){
+          perror("Error trying to fork child4");
+          exit(EXIT_FAILURE);
+        } 
+        else if (child4_pid == 0){
           sleep(1);
            print_info(4);
           system("ls -l");
@@ -111,7 +131,7 @@ void print_info(int child_number){
 char* cuserid_wrapper(){
     char* val = cuserid(NULL);
     if (val == NULL) {
-        perror("cuserid");
+        perror("error getting cuserid");
         exit(errno);
     } else {
         return val;
