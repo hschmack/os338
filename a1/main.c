@@ -3,6 +3,7 @@
  * EECS 338: Assignment 1
  * Due 9/17/15 
  */
+#define _XOPEN_SOURCE // required for cuserid to work
 
 #include <unistd.h> // fork()
 #include <limits.h>  // Needed for HOST_NAME_MAX
@@ -20,6 +21,7 @@
 void child_proc(int bin_start, int child_number);
 void child(int child_number);
 void print_info(int child_number);
+char* cuserid_wrapper();
 static int bin_coefficient(int n, int r);
 int n;
 
@@ -92,7 +94,28 @@ void child_proc(int bin_start, int child_number){
 }
 
 void print_info(int child_number){
+  printf("-------------------------------------------\n");
   printf("[CHILD %d] PPID = %d, PID = %d\n", child_number, getppid(), getpid());
+  printf("The username is: %s\n", cuserid_wrapper());
+
+  printf("user id: %d\n", getuid()); 
+  printf("effective user id: %d\n", geteuid());
+  printf("group id: %d\n",  getgid());
+  printf("effective group id: %d\n", getegid());
+  printf("-------------------------------------------\n");
+}
+
+/**
+ * Get the cuserid, return error if it doesnt work
+ */
+char* cuserid_wrapper(){
+    char* val = cuserid(NULL);
+    if (val == NULL) {
+        perror("cuserid");
+        exit(errno);
+    } else {
+        return val;
+    }
 }
 /*
  * computes binomial coefficents of n and r
