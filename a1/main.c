@@ -22,7 +22,7 @@ void child_proc(int bin_start, int child_number);
 void child(int child_number);
 void print_info(int child_number);
 char* cuserid_wrapper();
-void waste_time(int child_number); //implement this to waste some time
+void waste_time(); //implement this to waste some time
 static int bin_coefficient(int n, int r);
 
 int main(int argc, char *argv[]) {
@@ -129,6 +129,13 @@ char* cuserid_wrapper(){
         exit(errno);
     } else {
         return val;
+    }
+}
+
+void waste_time(){
+    int i;
+    for(i = 0; i < 600000; i++){
+	//waste some CPU Time to get significant results for execution time
     }
 }
 /*
