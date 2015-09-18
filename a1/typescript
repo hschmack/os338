@@ -1,0 +1,74 @@
+Script started on Thu Sep 17 20:07:27 2015
+]0;hbs25@eecslinab3: ~/os338/a1hbs25@eecslinab3:~/os338/a1$ make all
+gcc -c -Wall -Wextra main.c
+gcc main.o -o main
+]0;hbs25@eecslinab3: ~/os338/a1hbs25@eecslinab3:~/os338/a1$ ./a main  
+-------------------------------------------
+[CHILD 1] PPID = 891, PID = 893
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+(10 (10 - 2)) binomial coefficent computations of integers n=2, 3, 10, start now! 
+Wasting some CPU time to get significant results
+[Child 1] user CPU time: 272000 us
+[Child 1] system CPU time: 0 us
+child1 terminated with status: 0
+-------------------------------------------
+[CHILD 2] PPID = 891, PID = 894
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+-------------------------------------------
+[CHILD 3] PPID = 891, PID = 895
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+[CHILD 2] printing binary coefficient of 2 and 0 which is 1 
+[CHILD 3] printing binary coefficient of 3 and 1 which is 3 
+[CHILD 2] printing binary coefficient of 4 and 2 which is 6 
+[CHILD 3] printing binary coefficient of 5 and 3 which is 10 
+[CHILD 2] printing binary coefficient of 6 and 4 which is 15 
+[CHILD 3] printing binary coefficient of 7 and 5 which is 21 
+[CHILD 2] printing binary coefficient of 8 and 6 which is 28 
+[CHILD 3] printing binary coefficient of 9 and 7 which is 36 
+[CHILD 2] printing binary coefficient of 10 and 8 which is 45 
+Wasting some CPU time to get significant results
+[Child 3] user CPU time: 276000 us
+[Child 3] system CPU time: 0 us
+child3 terminated with status: 0
+Wasting some CPU time to get significant results
+[Child 2] user CPU time: 272000 us
+[Child 2] system CPU time: 0 us
+child2 terminated with status: 0
+-------------------------------------------
+[CHILD 4] PPID = 891, PID = 898
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+total 32
+-rw-rw-r-- 1 hbs25 hbs25   150 Sep 17 20:04 Makefile
+-rwxrwxr-x 1 hbs25 hbs25 12122 Sep 17 20:07 main
+-rw-rw-r-- 1 hbs25 hbs25  5470 Sep 17 20:07 main.c
+-rw-rw-r-- 1 hbs25 hbs25  4932 Sep 17 20:07 main.o
+-rw-rw-r-- 1 hbs25 hbs25     0 Sep 17 20:07 typescript
+Wasting some CPU time to get significant results
+[Child 4] user CPU time: 268000 us
+[Child 4] system CPU time: 4000 us
+child4 terminated with status: 0
+Wasting some CPU time to get significant results
+[Parent] user CPU time: 268000 us
+[Parent] system CPU time: 4000 us
+]0;hbs25@eecslinab3: ~/os338/a1hbs25@eecslinab3:~/os338/a1$ exit
+Script done on Thu Sep 17 20:08:06 2015
