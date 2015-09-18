@@ -1,0 +1,72 @@
+-------------------------------------------
+[CHILD 1] PPID = 920, PID = 921
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+(10 (10 - 2)) binomial coefficent computations of integers n=2, 3, 10, start now! 
+Wasting some CPU time to get significant results
+[Child 1] user CPU time: 276000 us
+[Child 1] system CPU time: 0 us
+child1 terminated with status: 0
+-------------------------------------------
+[CHILD 3] PPID = 920, PID = 923
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+[CHILD 3] printing binary coefficient of 3 and 1 which is 3 
+[CHILD 3] printing binary coefficient of 5 and 3 which is 10 
+[CHILD 3] printing binary coefficient of 7 and 5 which is 21 
+[CHILD 3] printing binary coefficient of 9 and 7 which is 36 
+Wasting some CPU time to get significant results
+[Child 3] user CPU time: 276000 us
+[Child 3] system CPU time: 0 us
+-------------------------------------------
+[CHILD 2] PPID = 920, PID = 922
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+[CHILD 2] printing binary coefficient of 2 and 0 which is 1 
+[CHILD 2] printing binary coefficient of 4 and 2 which is 6 
+[CHILD 2] printing binary coefficient of 6 and 4 which is 15 
+[CHILD 2] printing binary coefficient of 8 and 6 which is 28 
+[CHILD 2] printing binary coefficient of 10 and 8 which is 45 
+Wasting some CPU time to get significant results
+[Child 2] user CPU time: 276000 us
+[Child 2] system CPU time: 0 us
+total 40
+-rw-rw-r-- 1 hbs25 hbs25   150 Sep 17 20:04 Makefile
+-rwxrwxr-x 1 hbs25 hbs25 12122 Sep 17 20:07 main
+-rw-rw-r-- 1 hbs25 hbs25  5470 Sep 17 20:07 main.c
+-rw-rw-r-- 1 hbs25 hbs25  4932 Sep 17 20:07 main.o
+-rw-rw-r-- 1 hbs25 hbs25  1755 Sep 17 20:09 output.txt
+-rw-rw-r-- 1 hbs25 hbs25  3019 Sep 17 20:08 typescript
+child1 terminated with status: 0
+child3 terminated with status: 0
+child2 terminated with status: 0
+-------------------------------------------
+[CHILD 4] PPID = 920, PID = 924
+The username is: hbs25
+user id: 1585662676
+effective user id: 1585662676
+group id: 1585662676
+effective group id: 1585662676
+-------------------------------------------
+Wasting some CPU time to get significant results
+[Child 4] user CPU time: 272000 us
+[Child 4] system CPU time: 0 us
+child1 terminated with status: 0
+child3 terminated with status: 0
+child2 terminated with status: 0
+child4 terminated with status: 0
+Wasting some CPU time to get significant results
+[Parent] user CPU time: 272000 us
+[Parent] system CPU time: 0 us
