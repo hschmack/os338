@@ -29,9 +29,9 @@ void getrusage_wrapper(struct rusage* output);
 void waste_time(); 
 static int bin_coefficient(int n, int r);
 
-int main(int argc, char *argv[]) {
+int main(void) {
   int status = 0;
-  pid_t child1_pid, child2_pid, child3_pid, child4_pid, wpid;
+  pid_t child1_pid, child2_pid, child3_pid, child4_pid;
 
   child1_pid = fork();
 
