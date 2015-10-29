@@ -141,11 +141,34 @@ void stall(int iterations){
 }
 
 void withdrawing_cust(){
+    // Depositing Customer:
+    //  // Assume that the local variable deposit (int) contains the amount to be deposited.
+    // wait (mutex);
+    // balance := balance + deposit;
+    // if (wcount = 0) signal (mutex) // no withdrawal requests at this time.
+    // else if (FirstRequestAmount (LIST) > balance ) signal (mutex); // Still not enough balance for 1st waiting
+    //  // withdrawal request.
+    //  else signal (wlist); // Release the earliest waiting customer. Note that mutex is released
+    //  // by the withdrawal customer—to avoid race conditions.
+    // // Deposit has taken place.
 
 }
 
 void depositing_cust(){
-    
+    // // Assume that the local variable withdraw (int) contains the amount to be withdrawn.
+    // wait (mutex);
+    // if (wcount = 0 and balance > withdraw) // Enough balance to withdraw.
+    //     {balance := balance – withdraw; signal (mutex)}
+    // else {wcount := wcount + 1; // Either other withdrawal requests are waiting or not enough balance.
+    //     AddEndOf List (LIST, withdraw);
+    //     signal (mutex);
+    //     wait (wlist); // Start waiting for a deposit.
+    //     balance := balance – FirstRequestAmount (LIST); // Withdraw.
+    //     DeleteFirstRequest (LIST); // Remove own request from the waiting list.
+    //     wcount := wcount – 1;
+    //     if (wcount>1 and (FirstRequestAmount (LIST))<balance)) signal(wlist)
+    //     else signal (mutex)} // This signal() is paired with the depositing customer’s wait(mutex).
+    // // Withdrawal is completed. 
 }
 
 // These two functions are wrapper functions for the System-V
