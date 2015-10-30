@@ -89,7 +89,7 @@ int main(int argc, char *argv[]) {
     printf("HERE%d \n", 3);
     //turn the initial values array into initialized semaphores
     int semid = get_semid((key_t)SEMAPHORE_KEY);
-    if (semctl(semid, SEMAPHORE_MUTEX, SETALL, semaphore_values) == -1) {
+    if (semctl(semid, SEMAPHORE_MUTEX, SETALL, {1,0}) == -1) {
         perror("semctl failed");
         exit(EXIT_FAILURE);
     }
