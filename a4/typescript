@@ -1,0 +1,65 @@
+Script started on Thu 29 Oct 2015 08:41:06 PM EDT
+[1m[7m%[27m[1m[0m                                                                                                                                   ]2;hschmack@ubuntu: ~/os338/a4]1;~/os338/a4[0m[27m[24m[J[01;32m➜ [01;32m [36ma4 [01;34mgit:([31mmaster[34m) [33m✗[00m[00m[01;34m [00m[K[?1h=mmake[?1l>
+]2;make]1;makegcc -o main main.c
+[1m[7m%[27m[1m[0m                                                                                                                                   ]2;hschmack@ubuntu: ~/os338/a4]1;~/os338/a4[0m[27m[24m[J[01;32m➜ [01;32m [36ma4 [01;34mgit:([31mmaster[34m) [33m✗[00m[00m[01;34m [00m[K[?1h=lls[?1l>
+]2;ls --color=tty]1;ls[0m[01;32mmain[0m  main.c  makefile  output.txt  typescript
+[1m[7m%[27m[1m[0m                                                                                                                                   ]2;hschmack@ubuntu: ~/os338/a4]1;~/os338/a4[0m[27m[24m[J[01;32m➜ [01;32m [36ma4 [01;34mgit:([31mmaster[34m) [33m✗[00m[00m[01;34m [00m[K[?1h=../main[1m [0m[0m 100 -50 -50 -25 10 10  30 -5 200[?1l>
+]2;./main 100 -50 -50 -25 10 30 -5 200]1;./mainExecuting MAIN proccess with PID 11829.
+Customer with 100 dollars detected, forking.
+FORKING Depositer with 100 dollars to deposit 
+--- PID: 11830: Deposit: Waiting on Mutex.
+--- PID: 11830: Deposit: Passed Mutex.
+--- PID: 11830: Deposited: 100 New Balance: 100 
+--- PID: 11830: No customers waiting to withdraw at this point
+--- PID: 11830: Deposit: Signaling Mutex.
+Customer with -50 dollars detected, forking.
+FORKING Withdrawer with 50 dollars to get 
+--- PID: 11831: Withdraw: Waiting on Mutex.
+--- PID: 11831: Withdraw: Passed Mutex.
+--- PID: 11831: Withdraw: withdrew 50 from account. New balance: 50 
+--- PID: 11831: Withdraw: Signaling Mutex.
+Customer with -50 dollars detected, forking.
+FORKING Withdrawer with 50 dollars to get 
+--- PID: 11832: Withdraw: Waiting on Mutex.
+--- PID: 11832: Withdraw: Passed Mutex.
+--- PID: 11832: Withdraw: withdrew 50 from account. New balance: 0 
+--- PID: 11832: Withdraw: Signaling Mutex.
+Customer with -25 dollars detected, forking.
+FORKING Withdrawer with 25 dollars to get 
+--- PID: 11833: Withdraw: Waiting on Mutex.
+--- PID: 11833: Withdraw: Passed Mutex.
+--- PID: 11833: Withdraw: Signaling Mutex.
+--- PID 11833: Withdraw: need to withdraw 25 from balance of 0 
+--- PID: 11833: Withdraw: Waiting on deposit (withdraw semaphore).
+Customer with 10 dollars detected, forking.
+FORKING Depositer with 10 dollars to deposit 
+--- PID: 11835: Deposit: Waiting on Mutex.
+--- PID: 11835: Deposit: Passed Mutex.
+--- PID: 11835: Deposited: 10 New Balance: 10 
+--- PID: 11835: The new deposit 10 doesn't satisfy the waiting customers need for 25
+--- PID: 11835: Deposit: Signaling Mutex.
+Customer with 30 dollars detected, forking.
+FORKING Depositer with 30 dollars to deposit 
+--- PID: 11836: Deposit: Waiting on Mutex.
+--- PID: 11836: Deposit: Passed Mutex.
+--- PID: 11836: Deposited: 30 New Balance: 40 
+--- PID: 11836: Customers are waiting and there is enough money to service them
+--- PID: 11836: Deposit: Signaling WLIST.
+--- PID: 11833: Withdraw process woken, withdrawing 25. New Balance: 15.
+--- PID: 11833: Withdraw: Signaling Mutex.
+Customer with -5 dollars detected, forking.
+FORKING Withdrawer with 5 dollars to get 
+--- PID: 11837: Withdraw: Waiting on Mutex.
+--- PID: 11837: Withdraw: Passed Mutex.
+--- PID: 11837: Withdraw: withdrew 5 from account. New balance: 10 
+--- PID: 11837: Withdraw: Signaling Mutex.
+Customer with 200 dollars detected, forking.
+FORKING Depositer with 200 dollars to deposit 
+--- PID: 11838: Deposit: Waiting on Mutex.
+--- PID: 11838: Deposit: Passed Mutex.
+--- PID: 11838: Deposited: 200 New Balance: 210 
+--- PID: 11838: No customers waiting to withdraw at this point
+--- PID: 11838: Deposit: Signaling Mutex.
+DONE EXECUTING. BANK CLOSED 
+[1m[7m%[27m[1m[0m                                                                                                                                   ]2;hschmack@ubuntu: ~/os338/a4]1;~/os338/a4[0m[27m[24m[J[01;32m➜ [01;32m [36ma4 [01;34mgit:([31mmaster[34m) [33m✗[00m[00m[01;34m [00m[K[?1h=eeie exit
+Script done on Thu 29 Oct 2015 08:43:23 PM EDT

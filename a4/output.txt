@@ -1,0 +1,138 @@
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+FORKING Depositer with 100 dollars to deposit 
+--- PID: 11693: Deposit: Waiting on Mutex.
+--- PID: 11693: Deposit: Passed Mutex.
+--- PID: 11693: Deposited: 100 New Balance: 100 
+--- PID: 11693: No customers waiting to withdraw at this point
+--- PID: 11693: Deposit: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+FORKING Withdrawer with 25 dollars to get 
+--- PID: 11694: Withdraw: Waiting on Mutex.
+--- PID: 11694: Withdraw: Passed Mutex.
+--- PID: 11694: Withdraw: withdrew 25 from account. New balance: 75 
+--- PID: 11694: Withdraw: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+FORKING Withdrawer with 75 dollars to get 
+--- PID: 11695: Withdraw: Waiting on Mutex.
+--- PID: 11695: Withdraw: Passed Mutex.
+--- PID: 11695: Withdraw: withdrew 75 from account. New balance: 0 
+--- PID: 11695: Withdraw: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+FORKING Withdrawer with 50 dollars to get 
+--- PID: 11696: Withdraw: Waiting on Mutex.
+--- PID: 11696: Withdraw: Passed Mutex.
+--- PID: 11696: Withdraw: Signaling Mutex.
+--- PID 11696: Withdraw: need to withdraw 50 from balance of 0 
+--- PID: 11696: Withdraw: Waiting on deposit (withdraw semaphore).
+--- PID: 11696: Withdraw process woken, withdrawing 50. New Balance: 30.
+--- PID: 11696: Withdraw: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+Customer with 80 dollars detected, forking.
+FORKING Depositer with 80 dollars to deposit 
+--- PID: 11697: Deposit: Waiting on Mutex.
+--- PID: 11697: Deposit: Passed Mutex.
+--- PID: 11697: Deposited: 80 New Balance: 80 
+--- PID: 11697: Customers are waiting and there is enough money to service them
+--- PID: 11697: Deposit: Signaling WLIST.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+Customer with 80 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+FORKING Withdrawer with 75 dollars to get 
+--- PID: 11699: Withdraw: Waiting on Mutex.
+--- PID: 11699: Withdraw: Passed Mutex.
+--- PID: 11699: Withdraw: Signaling Mutex.
+--- PID 11699: Withdraw: need to withdraw 75 from balance of 30 
+--- PID: 11699: Withdraw: Waiting on deposit (withdraw semaphore).
+--- PID: 11699: Withdraw process woken, withdrawing 75. New Balance: 55.
+--- PID: 11699: Withdraw: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+Customer with 80 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with 100 dollars detected, forking.
+FORKING Depositer with 100 dollars to deposit 
+--- PID: 11700: Deposit: Waiting on Mutex.
+--- PID: 11700: Deposit: Passed Mutex.
+--- PID: 11700: Deposited: 100 New Balance: 130 
+--- PID: 11700: Customers are waiting and there is enough money to service them
+--- PID: 11700: Deposit: Signaling WLIST.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+Customer with 80 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with 100 dollars detected, forking.
+Customer with 25 dollars detected, forking.
+FORKING Depositer with 25 dollars to deposit 
+--- PID: 11701: Deposit: Waiting on Mutex.
+--- PID: 11701: Deposit: Passed Mutex.
+--- PID: 11701: Deposited: 25 New Balance: 80 
+--- PID: 11701: No customers waiting to withdraw at this point
+--- PID: 11701: Deposit: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+Customer with 80 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with 100 dollars detected, forking.
+Customer with 25 dollars detected, forking.
+Customer with 10 dollars detected, forking.
+FORKING Depositer with 10 dollars to deposit 
+--- PID: 11702: Deposit: Waiting on Mutex.
+--- PID: 11702: Deposit: Passed Mutex.
+--- PID: 11702: Deposited: 10 New Balance: 90 
+--- PID: 11702: No customers waiting to withdraw at this point
+--- PID: 11702: Deposit: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+Customer with 80 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with 100 dollars detected, forking.
+Customer with 25 dollars detected, forking.
+Customer with 10 dollars detected, forking.
+Customer with -30 dollars detected, forking.
+FORKING Withdrawer with 30 dollars to get 
+--- PID: 11703: Withdraw: Waiting on Mutex.
+--- PID: 11703: Withdraw: Passed Mutex.
+--- PID: 11703: Withdraw: withdrew 30 from account. New balance: 60 
+--- PID: 11703: Withdraw: Signaling Mutex.
+Executing MAIN proccess with PID 11692.
+Customer with 100 dollars detected, forking.
+Customer with -25 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with -50 dollars detected, forking.
+Customer with 80 dollars detected, forking.
+Customer with -75 dollars detected, forking.
+Customer with 100 dollars detected, forking.
+Customer with 25 dollars detected, forking.
+Customer with 10 dollars detected, forking.
+Customer with -30 dollars detected, forking.
+DONE EXECUTING. BANK CLOSED 
