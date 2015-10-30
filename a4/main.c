@@ -94,9 +94,13 @@ int main(int argc, char *argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    printf("HERE%d \n", 4);
+
     // Shared Memory
     int shmid = get_shmid((key_t)SEMAPHORE_KEY);
     struct shared_variable_struct * shared_variables = shmat(shmid, 0, 0);
+
+    printf("HERE%d \n", 5);
 
     //Set the initial values of the shared memory
     shared_variables->wcount = 0;
