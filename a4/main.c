@@ -18,7 +18,7 @@
 
 // This serves as both the key for the semaphores and the shared memory
 // (the same key fits two different locks)
-#define SEMAPHORE_KEY        0xFA2B
+#define SEMAPHORE_KEY        0xFA2A
 
 // The position of the various semaphores that we are using in the 
 // "semaphore array" that semget gets
@@ -225,7 +225,7 @@ void withdrawing_cust(int withdrawAmount){
     semaphore_wait(semid, SEMAPHORE_MUTEX);
     printf("--- PID: %d: Withdraw: Passed Mutex.\n", getpid());
     // if (wcount = 0 and balance > withdraw) // Enough balance to withdraw, no waiting customers.
-    if (shared_variables->wcount == 0 && shared_variables->balance > withdrawAmount) {
+    if (shared_variables->wcount == 0 && shared_variables->balance >= withdrawAmount) {
          //     balance := balance – withdraw; signal (mutex)
         shared_variables->balance = shared_variables->balance - withdrawAmount;
         printf("--- PID: %d: Withdraw: withdrew %d from account. New balance: %d \n",
