@@ -75,18 +75,18 @@ struct shared_variable_struct {
 // Main
 int main(int argc, char *argv[]) {
     printf("Executing MAIN proccess with PID %d.\n", getpid());
-
+    printf("HERE%d \n", 1);
     //TODO check if arguments are correct
 
     //to be used in semaphore creation
     union semun semaphore_values;
-
+    printf("HERE%d \n", 2);
     //initial values
     unsigned short semaphore_init_values[NUMBER_OF_SEMAPHORES];
     semaphore_init_values[SEMAPHORE_MUTEX] = 1;
     semaphore_init_values[SEMAPHORE_WLIST] = 0;
     semaphore_values.array = semaphore_init_values;
-
+    printf("HERE%d \n", 3);
     //turn the initial values array into initialized semaphores
     int semid = get_semid((key_t)SEMAPHORE_KEY);
     if (semctl(semid, SEMAPHORE_MUTEX, SETALL, semaphore_values) == -1) {
@@ -225,7 +225,7 @@ void withdrawing_cust(int withdrawAmount){
     semaphore_wait(semid, SEMAPHORE_MUTEX);
     printf("--- PID: %d: Withdraw: Passed Mutex.\n", getpid());
     // if (wcount = 0 and balance > withdraw) // Enough balance to withdraw, no waiting customers.
-    if (shared_variables->wcount == 0 && shared_variables->balance > withdrawAmount) {
+    if (shared_variables->wcount == 0 && shared_variables->balance >= withdrawAmount) {
          //     balance := balance – withdraw; signal (mutex)
         shared_variables->balance = shared_variables->balance - withdrawAmount;
         printf("--- PID: %d: Withdraw: withdrew %d from account. New balance: %d \n",
@@ -330,11 +330,17 @@ int get_shmid(key_t shmkey) {
 int firstRequestAmt(int list[]) {
     return list[0];
 }
-
+/*
+ * add a value onto the end of the list (first zero element, not element at end of array)
+ */
 void addEndOfList(int list[], int addition, int waitCnt) {
     list[waitCnt] = addition;
 }
-
+/*
+ * deletes first request by shifting everything to the left 
+ * and overwritting the first element. Sets last element to 0 since
+ * it should always be 0 after the first element is deleted
+ */
 void deleteFirstRequest(int list[], int length) {
     int i = 0;
     for (i; i < (length - 1); i ++) {
