@@ -103,6 +103,40 @@ int main(int argc, char *argv[]) {
     shared_variables->balance = 0;
     //waitingCustomers should initialize to 100 elements of 0
 
+    //go through args and fork 
+    int i = 1;
+    while ( i < argc ){
+        int moneyAmt = strtol(argv[i], NULL, 10);
+        printf("Customer with %d dollars detected, forking.\n", moneyAmt);
+        customer_fork(moneyAmt);
+        sleep(2);
+        i++;
+    }
+
+    //We need to wait until all the processes exit
+    int j;
+    for (j = 0; j < i; j++) {
+        wait(NULL);
+    }
+
+    printf("DONE EXECUTING. BANK CLOSED \n");
+
+    // // We need to clean up after ourselves
+    if (shmdt(shared_variables) == -1) {
+        perror("shmdt failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (shmctl(shmid, IPC_RMID, NULL) < 0) {
+        perror("shmctrl failed");
+        exit(EXIT_FAILURE);
+    }
+
+    if (semctl(semid, SEMAPHORE_MUTEX, IPC_RMID, semaphore_values) == -1) {
+        perror("semctl failedppp");
+        exit(EXIT_FAILURE);
+    }
+
 }
 
 
@@ -114,10 +148,15 @@ void customer_fork(int cashMoney) {
         exit(EXIT_FAILURE);
     } else if (child_pid == 0) {
         //here if child
-        if(cashMoney > 0) { //if the money they need is positive, then withdraw
-            withdrawing_cust(cashMoney);
-        } else if (cashMoney < 0) { //if it is negative then deposit
+        if(cashMoney < 0) { //if the money they need is positive, then withdraw
+            // cashMoney = cashMoney * -1;
+            printf("FORKING Withdrawer with %d dollars to get \n", cashMoney * -1);
+            withdrawing_cust(cashMoney * -1);
+            exit(0);
+        } else if (cashMoney > 0) { //if it is negative then deposit
+            printf("FORKING Depositer with %d dollars to deposit \n", cashMoney);
             depositing_cust(cashMoney);
+            exit(0);
         } else {
             printf("You want/have $0; Why are you even at the bank?\n");
             exit(EXIT_FAILURE);
@@ -150,24 +189,24 @@ void depositing_cust(int depositAmount){
     printf("--- PID: %d: Deposit: Passed Mutex.\n", getpid());
     // balance := balance + deposit;
     shared_variables->balance = shared_variables->balance + depositAmount;
-    printf("--- PID: %d: Deposited: %d New Balance: %d", getpid(), depositAmount, shared_variables->balance);
+    printf("--- PID: %d: Deposited: %d New Balance: %d \n", getpid(), depositAmount, shared_variables->balance);
 
     // if (wcount = 0) signal (mutex) // no withdrawal requests at this time.
-    if (shared_variables>wcount == 0) { 
-        printf("--- PID: %d: No customers waiting to withdraw at this point", getpid());
+    if (shared_variables->wcount == 0) { 
+        printf("--- PID: %d: No customers waiting to withdraw at this point\n", getpid());
         printf("--- PID: %d: Deposit: Signaling Mutex.\n", getpid());
         semaphore_signal(semid, SEMAPHORE_MUTEX);
     }
     // else if (FirstRequestAmount (LIST) > balance ) signal (mutex); // Still not enough balance for 1st waiting withdrawal request.
     else if(firstRequestAmt(shared_variables->waitingCustomers) > shared_variables->balance) {
-        printf("--- PID: %d: The new deposit %d doesn't satisfy the waiting customers need for %d", getpid(),shared_variables->balance,firstRequestAmt(shared_variables->waitingCustomers));
+        printf("--- PID: %d: The new deposit %d doesn't satisfy the waiting customers need for %d\n", getpid(),shared_variables->balance,firstRequestAmt(shared_variables->waitingCustomers));
         printf("--- PID: %d: Deposit: Signaling Mutex.\n", getpid());
         semaphore_signal(semid, SEMAPHORE_MUTEX);
     }
     //else signal (wlist); // Release the earliest waiting customer. 
     else {
         //Note that mutex is released by the withdrawal customer—to avoid race conditions.
-        printf("--- PID: %d: Customers are waiting and there is enough money to service them", getpid());
+        printf("--- PID: %d: Customers are waiting and there is enough money to service them\n", getpid());
         printf("--- PID: %d: Deposit: Signaling WLIST.\n", getpid());
         semaphore_signal(semid, SEMAPHORE_WLIST);
     }
@@ -181,21 +220,55 @@ void withdrawing_cust(int withdrawAmount){
     int shmid = get_shmid((key_t)SEMAPHORE_KEY);
     struct shared_variable_struct * shared_variables = shmat(shmid, 0, 0);
 
+    // wait (mutex);
     printf("--- PID: %d: Withdraw: Waiting on Mutex.\n", getpid());
     semaphore_wait(semid, SEMAPHORE_MUTEX);
     printf("--- PID: %d: Withdraw: Passed Mutex.\n", getpid());
-    // wait (mutex);
-    // if (wcount = 0 and balance > withdraw) // Enough balance to withdraw.
-    //     {balance := balance – withdraw; signal (mutex)}
+    // if (wcount = 0 and balance > withdraw) // Enough balance to withdraw, no waiting customers.
+    if (shared_variables->wcount == 0 && shared_variables->balance > withdrawAmount) {
+         //     balance := balance – withdraw; signal (mutex)
+        shared_variables->balance = shared_variables->balance - withdrawAmount;
+        printf("--- PID: %d: Withdraw: withdrew %d from account. New balance: %d \n",
+                getpid(), withdrawAmount, shared_variables->balance);
+        printf("--- PID: %d: Withdraw: Signaling Mutex.\n", getpid());
+        semaphore_signal(semid, SEMAPHORE_MUTEX);
+    }
     // else {wcount := wcount + 1; // Either other withdrawal requests are waiting or not enough balance.
-    //     AddEndOf List (LIST, withdraw);
+    else {
+        shared_variables->wcount = shared_variables->wcount + 1;
+        //AddEndOf List (LIST, withdraw);
+        addEndOfList(shared_variables->waitingCustomers, withdrawAmount, shared_variables->wcount);
     //     signal (mutex);
+        printf("--- PID: %d: Withdraw: Signaling Mutex.\n", getpid());
+        semaphore_signal(semid, SEMAPHORE_MUTEX);
     //     wait (wlist); // Start waiting for a deposit.
-    //     balance := balance – FirstRequestAmount (LIST); // Withdraw.
-    //     DeleteFirstRequest (LIST); // Remove own request from the waiting list.
-    //     wcount := wcount – 1;
-    //     if (wcount>1 and (FirstRequestAmount (LIST))<balance)) signal(wlist)
-    //     else signal (mutex)} // This signal() is paired with the depositing customer’s wait(mutex).
+        printf("--- PID %d: Withdraw: need to withdraw %d from balance of %d \n",
+            getpid(), withdrawAmount, shared_variables->balance);
+
+        printf("--- PID: %d: Withdraw: Waiting on deposit (withdraw semaphore).\n", getpid());
+        semaphore_wait(semid, SEMAPHORE_WLIST);
+
+    //  balance := balance – FirstRequestAmount (LIST); // Withdraw.
+        shared_variables->balance = shared_variables->balance - firstRequestAmt(shared_variables->waitingCustomers);
+        printf("--- PID: %d: Withdraw process woken, withdrawing %d. New Balance: %d.\n",
+                getpid(), firstRequestAmt(shared_variables->waitingCustomers), shared_variables->balance);
+    //  DeleteFirstRequest (LIST); // Remove own request from the waiting list.
+        deleteFirstRequest(shared_variables->waitingCustomers, 100);
+    //  wcount := wcount – 1;
+        shared_variables->wcount = shared_variables->wcount - 1;
+
+    //  if (wcount>1 and (FirstRequestAmount (LIST))<balance)) signal(wlist)
+        if ((shared_variables->wcount > 1) && firstRequestAmt(shared_variables->waitingCustomers) < shared_variables->balance){
+            printf("--- PID: %d: Customers are waiting and there is enough money to service them \n", getpid());
+            printf("--- PID: %d: Withdraw: Signaling WLIST.\n", getpid());
+            semaphore_signal(semid, SEMAPHORE_WLIST);
+        }
+    //  else signal (mutex)} // This signal() is paired with the depositing customer’s wait(mutex).
+        else {
+            printf("--- PID: %d: Withdraw: Signaling Mutex.\n", getpid());
+            semaphore_signal(semid, SEMAPHORE_MUTEX);
+        }
+    }
     // // Withdrawal is completed. 
 }
 
