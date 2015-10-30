@@ -82,9 +82,9 @@ int main(int argc, char *argv[]) {
     union semun semaphore_values;
     printf("HERE%d \n", 2);
     //initial values
-    unsigned short semaphore_init_values[NUMBER_OF_SEMAPHORES];
-    semaphore_init_values[SEMAPHORE_MUTEX] = 1;
-    semaphore_init_values[SEMAPHORE_WLIST] = 0;
+    unsigned short semaphore_init_values[2];
+    semaphore_init_values[0] = 1;
+    semaphore_init_values[1] = 0;
     semaphore_values.array = semaphore_init_values;
     printf("HERE%d \n", 3);
     //turn the initial values array into initialized semaphores
