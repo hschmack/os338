@@ -235,9 +235,9 @@ void withdrawing_cust(int withdrawAmount){
     }
     // else {wcount := wcount + 1; // Either other withdrawal requests are waiting or not enough balance.
     else {
-        shared_variables->wcount = shared_variables->wcount + 1;
         //AddEndOf List (LIST, withdraw);
         addEndOfList(shared_variables->waitingCustomers, withdrawAmount, shared_variables->wcount);
+        shared_variables->wcount = shared_variables->wcount + 1;
     //     signal (mutex);
         printf("--- PID: %d: Withdraw: Signaling Mutex.\n", getpid());
         semaphore_signal(semid, SEMAPHORE_MUTEX);
@@ -258,7 +258,7 @@ void withdrawing_cust(int withdrawAmount){
         shared_variables->wcount = shared_variables->wcount - 1;
 
     //  if (wcount>1 and (FirstRequestAmount (LIST))<balance)) signal(wlist)
-        if ((shared_variables->wcount > 1) && firstRequestAmt(shared_variables->waitingCustomers) < shared_variables->balance){
+        if ((shared_variables->wcount >= 1) && firstRequestAmt(shared_variables->waitingCustomers) < shared_variables->balance){
             printf("--- PID: %d: Customers are waiting and there is enough money to service them \n", getpid());
             printf("--- PID: %d: Withdraw: Signaling WLIST.\n", getpid());
             semaphore_signal(semid, SEMAPHORE_WLIST);
