@@ -17,6 +17,10 @@ int readcount = 0, randNum = 0;
 sem_t wrt, mutex;
 time_t t;
 
+/**
+ * @author Hayden Schmackpfeffer
+ * Assignment 5 Posix Threading
+ */
 int main(int argc, char const *argv[]) {
     pthread_t threads[NUM_THREADS];
     int thread_data[NUM_THREADS]; //just needs to include thread #, since we don't have any thread specific data
