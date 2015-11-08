@@ -5,27 +5,22 @@
 #include <unistd.h>
 
 #ifndef NUM_THREADS
-#define NUM_THREADS 200
+#define NUM_THREADS 25
 #endif
 
-//the range of return values for getRandom() function is
-//[-RAND_RANGE/2, RAND_RANGE/2]
-const unsigned int RAND_RANGE = RAND_MAX>>10;
-
-int getRand();//returns a random int
 void *reader(void *arg);//thread function for readers
 void *writer(void *arg);//thread function for writers
 void semwait(sem_t *sem);//error-checked semaphore wait
 void semsignal(sem_t *sem);//error-checked semaphore signal
 
-int readcount = 0;
+int readcount = 0, randNum = 0;
 sem_t wrt, mutex;
 time_t t;
 
 int main(int argc, char const *argv[]) {
     pthread_t threads[NUM_THREADS];
     int thread_data[NUM_THREADS]; //just needs to include thread #, since we don't have any thread specific data
-    //int errorCheck;//used to error check thread creation
+    int errorCheck;//used to error check thread creation
 
     //seed the random number generator
     srand((unsigned int)time(&t));
@@ -37,24 +32,33 @@ int main(int argc, char const *argv[]) {
         exit(EXIT_FAILURE);
     }
 
-    thread_data[0]= 0;
-    pthread_create(&threads[0], NULL, reader, &thread_data[0]);
+    //randomly generate readers and writers
+    for (int i = 0; i < NUM_THREADS; ++i) {
+        void *thread_func;//the function to call
 
-    thread_data[1]= 1;
-    pthread_create(&threads[1], NULL, writer, &thread_data[1]);
+        thread_data[i] = i;
+        randNum = rand();
 
-    thread_data[2]= 2;
-    pthread_create(&threads[2], NULL, reader, &thread_data[2]);
+        //~50-50 chance to create a reader or writer thread
+        if ( (randNum % 2) == 0) {
+            thread_func = reader;
+        } else {
+            thread_func = writer;//make this a deposit
+        }
+        if ((errorCheck = pthread_create(&threads[i], NULL, thread_func, &thread_data[i]))) {
+            fprintf(stderr, "error: pthread_create, %d\n", errorCheck);
+            return EXIT_FAILURE;
+        }
+        printf("Creating thread: %d\n", i);
+    }
 
-    pthread_join(threads[0], NULL);
-    pthread_join(threads[1], NULL);
-    pthread_join(threads[2], NULL);
-
+    //join all the threads
+    for (int i = 0; i < NUM_THREADS; ++i) {
+        if ((errorCheck = pthread_join(threads[i], NULL))) {
+            fprintf(stderr, "error: pthread_join, %d\n", errorCheck);
+        }
+    }
     return EXIT_SUCCESS;
-}
-
-int getRand() {
-    return ((rand() % RAND_RANGE) - RAND_RANGE/2);
 }
 
 void *reader(void *arg) {
