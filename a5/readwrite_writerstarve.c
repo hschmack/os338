@@ -67,15 +67,15 @@ void *reader(void *arg) {
 
     printf("---Thread %d entering reader. Timestamp is: %ld . \n", *thread_num, t);
     
-    //wait mutex
+    //wait for mutex to be signalled
     semwait(&mutex);
-    readcount++;
+    readcount++; //signify a reader is going
     if (readcount == 1) {
-        semwait(&wrt);
+        semwait(&wrt); //while readers are going, wait
     }
     semsignal(&mutex);  
-    //READ
 
+    //READ
     printf("---Thread %d is **BEGINNING READING**.\n", *thread_num);
     sleep(2);
     printf("---Thread %d is **DONE READING**.\n", *thread_num);
@@ -84,7 +84,7 @@ void *reader(void *arg) {
     semwait(&mutex);
 
     readcount--;
-    if (readcount == 0) {
+    if (readcount == 0) { //if there are no readers, there is finally time to write
         semsignal(&wrt);
     }
     semsignal(&mutex);
@@ -100,14 +100,14 @@ void *writer(void *arg) {
 
     printf("---Thread %d entering writer. Timestamp is: %ld \n", *thread_num, t);
 
-    semwait(&wrt);
+    semwait(&wrt); //wait until signalled by the reader
 
     //write
     printf("---Thread %d is **BEGINNING WRITING**. \n", *thread_num);
     sleep(2);
     printf("---Thread %d is **DONE WRITING**.\n", *thread_num);
 
-    semsignal(&wrt);
+    semsignal(&wrt); //signal other waiting writers
 
     time_t t_end = time(NULL);
     printf("---Thread %d exiting writer. Timestamp is: %ld, elapsed time is %ld seconds.\n", *thread_num, t_end, (t_end - t));
