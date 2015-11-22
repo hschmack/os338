@@ -13,9 +13,12 @@
 #define TINA 1
 
 char *server_hostname;
+char machine[200];
 CLIENT *client1;
+time_t t;
 
 void getCookie();
+void printInfo();
 
 int main(int argc, char *argv[]) {
 
@@ -27,8 +30,10 @@ int main(int argc, char *argv[]) {
 
    	//hostname is something like eecslinab.case.edu
 	server_hostname = argv[1];
+	gethostname(machine,200);	//set machine name
 
 	if (client1 = clnt_create(server_hostname, COOKIE_JAR, COOKIE_JAR_VERSION, "udp") == NULL) {
+		printInfo();
 		printf("---TINA: connecting to server: %s \n", server_hostname);
 		clnt_pcreateerror("Error creating client\n");
 		exit(EXIT_FAILURE);
@@ -48,13 +53,14 @@ void getCookie() {
 
 	//ensure that the client is not null before we try to send our request
 	if (client1 == NULL) {
+		printInfo();
 		printf("---TINA: reconnecting to server: %s \n", server_hostname);
 		if ((client1 = clnt_create(server_hostname, COOKIE_JAR, COOKIE_JAR_VERSION, "udp")) == NULL) {
 			clnt_pcreateerror("Error creating client\n");
 			exit(EXIT_FAILURE);
 		}
 	}
-
+	printInfo();
 	printf("---TINA: making cookie request\n");
 	//make the cookie request
 	if ((status=get_cookie_1(&par, client1)) ==NULL) {
@@ -69,6 +75,7 @@ void getCookie() {
 	 * -1 if it is judy, and judy cannot request
 	 * +1 if the cookie is successfully returned
 	 */
+	printInfo();
 	if (status->err== -2) {
 		printf("---TINA: cookie jar is EMPTY oh no!!!\n");
 	}
@@ -76,4 +83,8 @@ void getCookie() {
 		printf("---TINA: successfully got a cookie!!!\n");
 	}
 
+	void printInfo() {
+		t = time(NULL);
+		printf("\n Machine: %s, Time: %ld \n", machine, t);
+	}
 }
