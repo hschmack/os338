@@ -16,6 +16,7 @@ char *server_hostname;
 char machine[200];
 CLIENT *client1;
 time_t t;
+int flag;
 
 void getCookie();
 void printInfo();
@@ -31,6 +32,7 @@ int main(int argc, char *argv[]) {
    	//hostname is something like eecslinab.case.edu
 	server_hostname = argv[1];
 	gethostname(machine,200);	//set machine name
+	flag = 1; //flag will be set to -1 if jar is out of cookies
 
 	if (client1 = clnt_create(server_hostname, COOKIE_JAR, COOKIE_JAR_VERSION, "udp") == NULL) {
 		printInfo();
@@ -39,7 +41,12 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	getCookie(); 
+	while (flag == 1) {
+		getCookie();
+	} 
+
+	printInfo();
+	printf("---TINA: done requesting cookies\n");
 
 	return (0);
 }
@@ -77,6 +84,7 @@ void getCookie() {
 	 */
 	printInfo();
 	if (status->err== -2) {
+		flag  = -1;
 		printf("---TINA: cookie jar is EMPTY oh no!!!\n");
 	}
 	else if (status->err== 1) {
