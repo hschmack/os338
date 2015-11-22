@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
-	getCookie();
+	getCookie(); 
 
 	return (0);
 }
@@ -57,7 +57,7 @@ void getCookie() {
 
 	printf("---TINA: making cookie request\n");
 	//make the cookie request
-	if ((status=get_cookie_1(par, client1)) ==NULL) {
+	if ((status=get_cookie_1(&par, client1)) ==NULL) {
 	    clnt_perror(client1,server_hostname);
 	    clnt_destroy(client1);
 	    exit(EXIT_FAILURE);

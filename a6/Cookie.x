@@ -7,6 +7,6 @@ program COOKIE_JAR
 {
   version COOKIE_JAR_VERSION
   {
-    struct returnOne GET_COOKIE(struct CookieRequest) = 1;
+    struct CookieRequest GET_COOKIE(struct CookieRequest) = 1;
   } = 1;
 } = 0x2facaded;

@@ -17,7 +17,7 @@ time_t t;
  * Assignment 6:
  * Author: Hayden Schmackpfeffer
  */
-struct CookieRequest* get_cookie_1_svc(struct CookieRequest *request. struct svc_req *rqstp) {
+struct CookieRequest* get_cookie_1_svc(struct CookieRequest *request, struct svc_req *rqstp) {
 	static struct CookieRequest response;
 	int sister = request->sister;
 
@@ -44,20 +44,20 @@ struct CookieRequest* get_cookie_1_svc(struct CookieRequest *request. struct svc
 	//else assume the sister is JUDY
 	if (tinaCookies < 2) {
 		response.err=-1;
-		reponse.sister=JUDY;
+		response.sister=JUDY;
 		printf("---MOTHER: JUDY wants a cookie, but TINA has only gotten: %d \n", tinaCookies);
 		return (&response);
 	} else {
 		cookies--;
 		tinaCookies=0;
-		reponse.err=1;
-		reponse.sister=JUDY;
+		response.err=1;
+		response.sister=JUDY;
 		printf("---MOTHER: Giving a cookie to JUDY. Cookies left: %d", cookies);
 		return (&response);
 	}
 
 	response.err=0;
-	reponse.sister=-1;
+	response.sister=-1;
 	prinft("---MOTHER: This case should never be reached (sister is not Judy or Tina");
 	return (&response);
 }
