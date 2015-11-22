@@ -82,9 +82,9 @@ void getCookie() {
 	else if (status->err== 1) {
 		printf("---TINA: successfully got a cookie!!!\n");
 	}
+}
 
-	void printInfo() {
-		t = time(NULL);
-		printf("\n Machine: %s, Time: %ld \n", machine, t);
-	}
+void printInfo() {
+	t = time(NULL);
+	printf("\n Machine: %s, Time: %ld \n", machine, t);
 }
