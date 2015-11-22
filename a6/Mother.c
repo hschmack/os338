@@ -59,5 +59,5 @@ struct CookieRequest* get_cookie_1_svc(struct CookieRequest *request. struct svc
 	response.err=0;
 	reponse.sister=-1;
 	prinft("---MOTHER: This case should never be reached (sister is not Judy or Tina");
-	return response;
+	return (&response);
 }

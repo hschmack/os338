@@ -1,6 +1,6 @@
 struct CookieRequest {
-	int err; 		//return code
-	int sister;		//1 for Tina, 2 for Judy
+	int err;
+	int sister;
 };
 
 program COOKIE_JAR
