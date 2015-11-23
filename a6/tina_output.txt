@@ -1,0 +1,97 @@
+
+ Machine: eecslinab2, Time: 1448239648 
+---TINA: reconnecting to server: eecslinab3.case.edu 
+
+ Machine: eecslinab2, Time: 1448239648 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239648 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239649 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239649 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239650 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239650 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239651 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239651 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239652 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239652 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239653 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239653 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239654 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239654 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239655 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239655 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239656 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239656 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239657 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239657 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239658 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239658 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239659 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239659 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239660 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239660 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239661 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239661 
+---TINA: successfully got a cookie!!!
+
+ Machine: eecslinab2, Time: 1448239662 
+---TINA: making cookie request
+
+ Machine: eecslinab2, Time: 1448239662 
+---TINA: cookie jar is EMPTY oh no!!!
+
+ Machine: eecslinab2, Time: 1448239663 
+---TINA: done requesting cookies
+ Total Cookies Recieved: 14
