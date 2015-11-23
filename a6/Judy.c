@@ -43,8 +43,13 @@ int main(int argc, char *argv[]) {
 		exit(EXIT_FAILURE);
 	}
 
+	//seed the random number generator
+    srand((unsigned int)time(&t));
+
 	while (flag == 1) {
-		getCookie();
+		if ( (rand() % 2) == 0 ){
+			getCookie();
+		}
 		sleep(1);
 	} 
 
