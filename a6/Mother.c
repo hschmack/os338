@@ -13,6 +13,7 @@
 int cookies = 20, tinaCookies = 0;
 time_t t;
 char machine[200];
+int cookies_tina = 0, cookies_judy = 0;
 
 void printInfo();
 /**
@@ -34,6 +35,7 @@ struct CookieRequest* get_cookie_1_svc(struct CookieRequest *request, struct svc
 		response.sister=TINA;
 		printInfo();
 		printf("---MOTHER: Not enough cookies in the cookie jar.\n");
+		printf("Cookies Given to Tina: %d, Cookies Given to Judy: %d\n", cookies_tina, cookies_judy);
 		return (&response);
 	}
 	if (sister == TINA) {
