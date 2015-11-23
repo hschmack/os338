@@ -43,6 +43,7 @@ int main(int argc, char *argv[]) {
 
 	while (flag == 1) {
 		getCookie();
+		sleep(1);
 	} 
 
 	printInfo();
