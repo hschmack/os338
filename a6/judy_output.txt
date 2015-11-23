@@ -1,0 +1,103 @@
+
+ Machine: eecslinab7, Time: 1448239646 
+---JUDY: reconnecting to server: eecslinab3.case.edu 
+
+ Machine: eecslinab7, Time: 1448239646 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239646 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239647 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239647 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239648 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239648 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239649 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239649 
+---JUDY: successfully got a cookie!!!
+
+ Machine: eecslinab7, Time: 1448239650 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239650 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239651 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239651 
+---JUDY: successfully got a cookie!!!
+
+ Machine: eecslinab7, Time: 1448239652 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239652 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239653 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239653 
+---JUDY: successfully got a cookie!!!
+
+ Machine: eecslinab7, Time: 1448239654 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239654 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239655 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239655 
+---JUDY: successfully got a cookie!!!
+
+ Machine: eecslinab7, Time: 1448239656 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239656 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239657 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239657 
+---JUDY: successfully got a cookie!!!
+
+ Machine: eecslinab7, Time: 1448239658 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239658 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239659 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239659 
+---JUDY: successfully got a cookie!!!
+
+ Machine: eecslinab7, Time: 1448239660 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239660 
+---JUDY: Judy must wait for Tina to get 2 cookies in a row
+
+ Machine: eecslinab7, Time: 1448239661 
+---JUDY: making cookie request
+
+ Machine: eecslinab7, Time: 1448239661 
+---JUDY: cookie jar is EMPTY oh no!!!
+
+ Machine: eecslinab7, Time: 1448239662 
+---JUDY: done requesting cookies
+ Total Cookies Recieved: 6
