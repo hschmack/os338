@@ -90,7 +90,7 @@ void getCookie() {
 		flag  = -1;
 		printf("---JUDY: cookie jar is EMPTY oh no!!!\n");
 	}
-	else if (status->err=-1){
+	else if (status->err==-1){
 		printf("---JUDY: Judy must wait for Tina to get 2 cookies in a row\n");
 	}
 	else if (status->err== 1) {

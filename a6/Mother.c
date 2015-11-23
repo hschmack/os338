@@ -41,6 +41,7 @@ struct CookieRequest* get_cookie_1_svc(struct CookieRequest *request, struct svc
 	if (sister == TINA) {
 		cookies--;
 		tinaCookies++;
+		cookies_tina++;
 		response.err=1;
 		response.sister=TINA;
 		printInfo();
@@ -57,6 +58,7 @@ struct CookieRequest* get_cookie_1_svc(struct CookieRequest *request, struct svc
 	} else {
 		cookies--;
 		tinaCookies=0;
+		cookies_judy++;
 		response.err=1;
 		response.sister=JUDY;
 		printInfo();
